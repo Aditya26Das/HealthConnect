@@ -30,7 +30,7 @@ export default function Home() {
         </p>
 
         <div className="flex mt-12 space-x-4">
-          <Link href="/register">
+          <Link href="/signup">
             <div className="px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition duration-300 cursor-pointer">
               Registration
             </div>

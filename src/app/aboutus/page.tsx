@@ -8,8 +8,8 @@ export default function AboutUs() {
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
-        <title>About Us - Health Care</title>
-        <meta name="description" content="Learn more about our journey and mission at Health Care." />
+        <title>About Us - Health Connect</title>
+        <meta name="description" content="Learn more about our journey and mission at Health Connect." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -17,12 +17,12 @@ export default function AboutUs() {
 
       <main className="flex flex-col items-center w-full flex-1 px-6 md:px-20 text-center bg-blue-50">
         <h1 className="text-6xl font-bold text-gray-800 mb-8 mt-12">
-          About <span className="text-blue-600">Health Care</span>
+          About <span className="text-blue-600">Health Connect</span>
         </h1>
 
         <section className="text-gray-700 text-lg leading-relaxed max-w-4xl mx-auto">
           <p className="mb-6">
-            Health Care was born out of a profound personal experience and a strong desire to make a difference. Our founder, John Doe, faced a critical health crisis in 2018, which made him realize the immense challenges people face in accessing timely and efficient healthcare. During his recovery, John was struck by the stories of countless individuals who struggled to find the right medical help when they needed it the most.
+            Health Connect was born out of a profound personal experience and a strong desire to make a difference. Our founder, John Doe, faced a critical health crisis in 2018, which made him realize the immense challenges people face in accessing timely and efficient healthcare. During his recovery, John was struck by the stories of countless individuals who struggled to find the right medical help when they needed it the most.
           </p>
 
           <p className="mb-6">
@@ -34,11 +34,11 @@ export default function AboutUs() {
           </blockquote>
 
           <p className="mb-6">
-            From humble beginnings in a small office, the team worked tirelessly, driven by the belief that healthcare should be accessible to everyone. They faced numerous challenges, but their unwavering commitment kept them going. Through innovation and dedication, Health Care evolved into a comprehensive platform that not only connects patients with doctors but also provides a seamless experience for managing appointments and healthcare records.
+            From humble beginnings in a small office, the team worked tirelessly, driven by the belief that healthcare should be accessible to everyone. They faced numerous challenges, but their unwavering commitment kept them going. Through innovation and dedication, Health Connect evolved into a comprehensive platform that not only connects patients with doctors but also provides a seamless experience for managing appointments and healthcare records.
           </p>
 
           <p className="mb-6">
-            Today, Health Care stands as a testament to what can be achieved with empathy, hard work, and a relentless pursuit of excellence. Our mission is to empower individuals with the tools they need to take control of their health and well-being.
+            Today, Health Connect stands as a testament to what can be achieved with empathy, hard work, and a relentless pursuit of excellence. Our mission is to empower individuals with the tools they need to take control of their health and well-being.
           </p>
 
           <blockquote className="italic text-2xl text-blue-600 my-8">
@@ -68,7 +68,7 @@ export default function AboutUs() {
       </main>
 
       <footer className="w-full h-24 flex items-center justify-center border-t mt-8">
-        <p className="text-gray-600">&copy; 2024 Health Care. All rights reserved.</p>
+        <p className="text-gray-600">&copy; 2024 Health Connect. All rights reserved.</p>
       </footer>
     </div>
   );

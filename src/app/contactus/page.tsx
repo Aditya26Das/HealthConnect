@@ -35,7 +35,7 @@ export default function ContactUs() {
           <div className="bg-white shadow-md rounded-lg p-8 mb-6">
             <h2 className="text-3xl font-bold text-gray-800 mb-4">Contact Information</h2>
             <p className="text-lg mb-2">
-              <strong>Email:</strong> support@healthcare.com
+              <strong>Email:</strong> support@healthconnect.com
             </p>
             <p className="text-lg mb-2">
               <strong>Phone:</strong> +1 (555) 123-4567
