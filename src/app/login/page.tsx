@@ -1,7 +1,7 @@
 "use client";
-import { useState, ChangeEvent } from 'react';
-import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
+import { useState } from 'react';
+// import { useRouter } from 'next/navigation'; --> gives error e._formData
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -9,24 +9,24 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { login } from '@/api/appwrite/auth';
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { login } from "@/api/appwrite/auth";
 
 function Login() {
-  const router = useRouter();
+  // const router = useRouter();  --> gives error e._formData
   const [doctorDetails, setDoctorDetails] = useState({ email: '', password: '' });
   const [patientDetails, setPatientDetails] = useState({ email: '', password: '' });
   const [error, setError] = useState<string | null>(null);
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>, userType: 'Doctor' | 'Patient') => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, userType: 'Doctor' | 'Patient') => {
     const { id, value } = e.target;
     if (userType === 'Doctor') {
-      setDoctorDetails({ ...doctorDetails, [id]: value });
+      setDoctorDetails(prev => ({ ...prev, [id]: value }));
     } else {
-      setPatientDetails({ ...patientDetails, [id]: value });
+      setPatientDetails(prev => ({ ...prev, [id]: value }));
     }
   };
 
@@ -34,7 +34,7 @@ function Login() {
     const details = userType === 'Doctor' ? doctorDetails : patientDetails;
     try {
       await login(details.email, details.password);
-      router.push('/dashboard'); // Redirect after successful login
+      //router.push('/');// Redirect logic here  --> gives error e._formData
     } catch (error: unknown) {
       if (error instanceof Error) {
         setError(error.message);
@@ -55,24 +55,26 @@ function Login() {
           <Card>
             <CardHeader>
               <CardTitle>Doctor</CardTitle>
-              <CardDescription>Login As a Doctor</CardDescription>
+              <CardDescription>Login as a Doctor Here</CardDescription>
             </CardHeader>
             <CardContent className="space-y-2">
               <div className="space-y-1">
-                <Label htmlFor="doctor-email">Email</Label>
+                <Label htmlFor="email">Email</Label>
                 <Input
-                  id="doctor-email"
+                  id="email"
                   value={doctorDetails.email}
                   onChange={(e) => handleInputChange(e, 'Doctor')}
+                  placeholder="Enter your email"
                 />
               </div>
               <div className="space-y-1">
-                <Label htmlFor="doctor-password">Password</Label>
+                <Label htmlFor="password">Password</Label>
                 <Input
-                  id="doctor-password"
+                  id="password"
                   type="password"
                   value={doctorDetails.password}
                   onChange={(e) => handleInputChange(e, 'Doctor')}
+                  placeholder="Enter your password"
                 />
               </div>
               {error && <div className="text-red-500">{error}</div>}
@@ -86,24 +88,26 @@ function Login() {
           <Card>
             <CardHeader>
               <CardTitle>Patient</CardTitle>
-              <CardDescription>Login as a Patient</CardDescription>
+              <CardDescription>Login as a Patient Here</CardDescription>
             </CardHeader>
             <CardContent className="space-y-2">
               <div className="space-y-1">
-                <Label htmlFor="patient-email">Email</Label>
+                <Label htmlFor="email">Email</Label>
                 <Input
-                  id="patient-email"
+                  id="email"
                   value={patientDetails.email}
                   onChange={(e) => handleInputChange(e, 'Patient')}
+                  placeholder="Enter your email"
                 />
               </div>
               <div className="space-y-1">
-                <Label htmlFor="patient-password">Password</Label>
+                <Label htmlFor="password">Password</Label>
                 <Input
-                  id="patient-password"
+                  id="password"
                   type="password"
                   value={patientDetails.password}
                   onChange={(e) => handleInputChange(e, 'Patient')}
+                  placeholder="Enter your password"
                 />
               </div>
               {error && <div className="text-red-500">{error}</div>}
