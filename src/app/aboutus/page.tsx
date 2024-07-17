@@ -2,7 +2,6 @@
 "use client";
 import Head from 'next/head';
 import Link from 'next/link';
-import Header from '../../components/Header';
 
 export default function AboutUs() {
   return (
@@ -12,8 +11,6 @@ export default function AboutUs() {
         <meta name="description" content="Learn more about our journey and mission at Health Connect." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <Header />
 
       <main className="flex flex-col items-center w-full flex-1 px-6 md:px-20 text-center bg-blue-50">
         <h1 className="text-6xl font-bold text-gray-800 mb-8 mt-12">
@@ -66,10 +63,6 @@ export default function AboutUs() {
           </div>
         </section>
       </main>
-
-      <footer className="w-full h-24 flex items-center justify-center border-t mt-8">
-        <p className="text-gray-600">&copy; 2024 Health Connect. All rights reserved.</p>
-      </footer>
     </div>
   );
 }

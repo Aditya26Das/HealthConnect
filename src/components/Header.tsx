@@ -1,12 +1,12 @@
-// components/Header.tsx
 "use client";
-import Link from 'next/link';
-import { useState, useEffect, useRef } from 'react';
+import Link from "next/link";
+import { useState, useEffect, useRef } from "react";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [selectedDoctor, setSelectedDoctor] = useState('');
+  const [selectedDoctor, setSelectedDoctor] = useState("");
+  const [profileImage, setProfileImage] = useState("");
   const dropdownRef = useRef<HTMLDivElement>(null);
   const mobileDropdownRef = useRef<HTMLDivElement>(null);
 
@@ -25,23 +25,29 @@ export default function Header() {
   };
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
       setIsMenuOpen(false);
     }
-    if (mobileDropdownRef.current && !mobileDropdownRef.current.contains(event.target as Node)) {
-      setIsMenuOpen(false);
+    if (
+      mobileDropdownRef.current &&
+      !mobileDropdownRef.current.contains(event.target as Node)
+    ) {
+      setIsMobileMenuOpen(false);
     }
   };
 
   useEffect(() => {
     if (isMenuOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     } else {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isMenuOpen]);
 
@@ -51,6 +57,65 @@ export default function Header() {
         <h1 className="text-3xl font-bold">
           <Link href="/">Health Connect</Link>
         </h1>
+        <div className="hidden sm:flex items-center space-x-4">
+          <nav className="flex space-x-4">
+            <Link href="/" className="hover:underline">
+              Home
+            </Link>
+            <Link href="/aboutus" className="hover:underline">
+              About Us
+            </Link>
+            <Link href="/contactus" className="hover:underline">
+              Contact Us
+            </Link>
+            <div className="relative" ref={dropdownRef}>
+              <button className="hover:underline" onClick={toggleMenu}>
+                Search Doctors
+              </button>
+              {isMenuOpen && (
+                <div className="absolute bg-white text-black mt-2 py-2 w-48 shadow-lg rounded">
+                  <button
+                    className="block px-4 py-2 hover:bg-gray-200 w-full text-left"
+                    onClick={() => handleSelectDoctor("General Physicians")}
+                  >
+                    General Physicians
+                  </button>
+                  <button
+                    className="block px-4 py-2 hover:bg-gray-200 w-full text-left"
+                    onClick={() => handleSelectDoctor("Specialists")}
+                  >
+                    Specialists
+                  </button>
+                  <button
+                    className="block px-4 py-2 hover:bg-gray-200 w-full text-left"
+                    onClick={() => handleSelectDoctor("Surgeons")}
+                  >
+                    Surgeons
+                  </button>
+                </div>
+              )}
+            </div>
+          </nav>
+          <Link href="/login" className="hover:underline">
+            Login
+          </Link>
+          <Link href="/signup" className="hover:underline">
+            Sign Up
+          </Link>
+          <div className="relative">
+            {profileImage ? (
+              <img
+                src={profileImage}
+                alt="Profile"
+                className="h-8 w-8 rounded-full border-2 border-white"
+              />
+            ) : (
+              <div className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center border-2 border-white">
+                <span className="text-gray-500"></span>
+              </div>
+            )}
+          </div>
+        </div>
         <button
           className="text-white sm:hidden block focus:outline-none"
           onClick={toggleMobileMenu}
@@ -70,54 +135,24 @@ export default function Header() {
             ></path>
           </svg>
         </button>
-        <nav className="hidden sm:flex space-x-4 portrait:hidden">
-          <Link href="/" className="hover:underline">
-            Home
-          </Link>
-          <Link href="/aboutus" className="hover:underline">
-            About Us
-          </Link>
-          <Link href="/contactus" className="hover:underline">
-            Contact Us
-          </Link>
-          <div className="relative" ref={dropdownRef}>
-            <button className="hover:underline" onClick={toggleMenu}>
-              Search Doctors
-            </button>
-            {isMenuOpen && (
-              <div className="absolute bg-white text-black mt-2 py-2 w-48 shadow-lg rounded">
-                <button
-                  className="block px-4 py-2 hover:bg-gray-200 w-full text-left"
-                  onClick={() => handleSelectDoctor('General Physicians')}
-                >
-                  General Physicians
-                </button>
-                <button
-                  className="block px-4 py-2 hover:bg-gray-200 w-full text-left"
-                  onClick={() => handleSelectDoctor('Specialists')}
-                >
-                  Specialists
-                </button>
-                <button
-                  className="block px-4 py-2 hover:bg-gray-200 w-full text-left"
-                  onClick={() => handleSelectDoctor('Surgeons')}
-                >
-                  Surgeons
-                </button>
-              </div>
-            )}
-          </div>
-          <Link href="/login" className="hover:underline">
-            Login
-          </Link>
-          <Link href="/signup" className="hover:underline">
-            Sign Up
-          </Link>
-        </nav>
       </div>
+
       {isMobileMenuOpen && (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-75 z-50 portrait:block">
           <div className="fixed inset-y-0 left-0 bg-blue-600 text-white w-64 p-4">
+          <div className="relative">
+              {profileImage ? (
+                <img
+                  src={profileImage}
+                  alt="Profile"
+                  className="h-8 w-8 rounded-full border-2 border-white"
+                />
+              ) : (
+                <div className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center border-2 border-white">
+                  <span className="text-gray-500"></span>
+                </div>
+              )}
+            </div>
             <button
               className="text-white focus:outline-none"
               onClick={toggleMobileMenu}
@@ -155,19 +190,19 @@ export default function Header() {
                   <div className="mt-2 bg-blue-700 text-white">
                     <button
                       className="block px-4 py-2 hover:bg-blue-800 text-left"
-                      onClick={() => handleSelectDoctor('General Physicians')}
+                      onClick={() => handleSelectDoctor("General Physicians")}
                     >
                       General Physicians
                     </button>
                     <button
                       className="block px-4 py-2 hover:bg-blue-800 text-left"
-                      onClick={() => handleSelectDoctor('Specialists')}
+                      onClick={() => handleSelectDoctor("Specialists")}
                     >
                       Specialists
                     </button>
                     <button
                       className="block px-4 py-2 hover:bg-blue-800 text-left"
-                      onClick={() => handleSelectDoctor('Surgeons')}
+                      onClick={() => handleSelectDoctor("Surgeons")}
                     >
                       Surgeons
                     </button>
@@ -184,6 +219,7 @@ export default function Header() {
           </div>
         </div>
       )}
+
       {selectedDoctor && (
         <div className="bg-blue-100 text-blue-800 p-2 text-center">
           Selected Doctor: {selectedDoctor}
@@ -192,5 +228,3 @@ export default function Header() {
     </header>
   );
 }
-
-

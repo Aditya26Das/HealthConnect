@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import Header from "@/components/Header";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -26,7 +27,11 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
+        <Header />
         {children}
+        <footer className="w-full h-24 flex items-center justify-center border-t mt-8">
+        <p className="text-gray-600">&copy; 2024 Health Connect. All rights reserved.</p>
+      </footer>
       </body>
     </html>
   );

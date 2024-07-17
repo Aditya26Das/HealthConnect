@@ -1,7 +1,6 @@
 "use client";
 import Head from 'next/head';
 import Link from 'next/link';
-import Header from '../components/Header';
 
 export default function Home() {
   return (
@@ -11,8 +10,6 @@ export default function Home() {
         <meta name="description" content="Schedule doctor appointments with ease." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <Header />
 
       <main className="flex flex-col items-center w-full flex-1 px-20 text-center bg-blue-50">
         <h1 className="text-6xl font-bold text-gray-800 mb-8 mt-12">
@@ -42,10 +39,6 @@ export default function Home() {
           </Link>
         </div>
       </main>
-
-      <footer className="w-full h-24 flex items-center justify-center border-t mt-8">
-        <p className="text-gray-600">&copy; 2024 Health Connect. All rights reserved.</p>
-      </footer>
     </div>
   );
 }
