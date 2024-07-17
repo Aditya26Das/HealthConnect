@@ -1,6 +1,6 @@
 "use client";
 import { useState } from 'react';
-// import { useRouter } from 'next/navigation'; --> gives error e._formData
+import { useRouter } from 'next/navigation';
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -16,7 +16,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { login } from "@/api/appwrite/auth";
 
 function Login() {
-  // const router = useRouter();  --> gives error e._formData
+  const router = useRouter();
   const [doctorDetails, setDoctorDetails] = useState({ email: '', password: '' });
   const [patientDetails, setPatientDetails] = useState({ email: '', password: '' });
   const [error, setError] = useState<string | null>(null);
@@ -33,8 +33,13 @@ function Login() {
   const handleLogin = async (userType: 'Doctor' | 'Patient') => {
     const details = userType === 'Doctor' ? doctorDetails : patientDetails;
     try {
-      await login(details.email, details.password);
-      //router.push('/');// Redirect logic here  --> gives error e._formData
+      const session = await login(details.email, details.password);
+      if (session && details === doctorDetails) {
+        router.push('/doctor-dashboard');
+      }
+      else if (session && details === patientDetails) {
+        router.push('/patient-dashboard');
+      }
     } catch (error: unknown) {
       if (error instanceof Error) {
         setError(error.message);

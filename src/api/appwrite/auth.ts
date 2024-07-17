@@ -31,14 +31,14 @@ export const login = async (email: string, password: string): Promise<any> => {
             email,
             password
         );
-        console.log(session);
-        const nextJsCookies = cookies();
-        nextJsCookies.set("my-custom-session", session.secret, {
-            path: "/",
-            httpOnly: true,
-            sameSite: "strict",
-            secure: true,
-        });
+        // console.log(session);
+        // const nextJsCookies = cookies();
+        // nextJsCookies.set("my-custom-session", session.secret, {
+        //     path: "/",
+        //     httpOnly: true,
+        //     sameSite: "strict",
+        //     secure: true,
+        // });
         return session; // Return the session so we can handle the response in the client
     } catch (error:any) {
         console.error("Login error:", error);

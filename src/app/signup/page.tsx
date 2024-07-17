@@ -33,8 +33,12 @@ function Signup() {
   const handleRegister = async (userType: 'Doctor' | 'Patient') => {
     const details = userType === 'Doctor' ? doctorDetails : patientDetails;
     try {
-      await signUp(details.email, details.password, details.name);
-      router.push('/login'); // Redirect to login page after successful signup
+      const user = await signUp(details.email, details.password, details.name);
+      if (user) {
+        router.push('/login');
+      } else {
+        setError('Registration failed');
+      }
     } catch (error: unknown) {
       if (error instanceof Error) {
         setError(error.message);
