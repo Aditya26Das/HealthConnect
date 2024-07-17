@@ -35,7 +35,12 @@ function Signup() {
     try {
       const user = await signUp(details.email, details.password, details.name);
       if (user) {
-        router.push('/login');
+        if (details === doctorDetails) {
+          router.push('/doctor-dashboard');
+        }
+        else{
+          router.push('/patient-dashboard');
+        }
       } else {
         setError('Registration failed');
       }

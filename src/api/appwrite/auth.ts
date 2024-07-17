@@ -27,7 +27,7 @@ export const signUp = async (email: string, password: string, name: string): Pro
 
 export const login = async (email: string, password: string): Promise<any> => {
     try {
-        const session = await account.createEmailPasswordSession(
+        return await account.createEmailPasswordSession(
             email,
             password
         );
@@ -38,8 +38,7 @@ export const login = async (email: string, password: string): Promise<any> => {
         //     httpOnly: true,
         //     sameSite: "strict",
         //     secure: true,
-        // });
-        return session; // Return the session so we can handle the response in the client
+        // }); // Return the session so we can handle the response in the client
     } catch (error:any) {
         console.error("Login error:", error);
         throw new Error(`Login failed: ${error.message}`);
