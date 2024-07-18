@@ -14,8 +14,10 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { signUp } from '@/api/appwrite/auth';
+import { useUser } from '@/context';
 
 function Signup() {
+  const {setUser} = useUser();
   const router = useRouter();
   const [doctorDetails, setDoctorDetails] = useState({ name: '', email: '', password: '' });
   const [patientDetails, setPatientDetails] = useState({ name: '', email: '', password: '' });
@@ -34,6 +36,13 @@ function Signup() {
     const details = userType === 'Doctor' ? doctorDetails : patientDetails;
     try {
       const user = await signUp(details.email, details.password, details.name);
+
+      setUser({
+        isLoggedIn: true,
+        isDoctor: userType === 'Doctor',
+        userId: user.$id
+      })
+
       if (user) {
         if (details === doctorDetails) {
           router.push('/doctor-dashboard');

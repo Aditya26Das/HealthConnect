@@ -1,7 +1,7 @@
 "use server";
 import conf from "@/conf/config";
 import { Client, Account, ID } from "appwrite";
-import { cookies } from "next/headers";
+// import { cookies } from "next/headers";
 
 const client = new Client()
     .setEndpoint(conf.appwrite_url)
@@ -17,7 +17,7 @@ export const signUp = async (email: string, password: string, name: string): Pro
             password,
             name
         );
-        console.log(result);
+        // console.log(result);
         return result; // Return the result so we can handle the response in the client
     } catch (error:any) {
         console.error("Signup error:", error);
@@ -27,11 +27,15 @@ export const signUp = async (email: string, password: string, name: string): Pro
 
 export const login = async (email: string, password: string): Promise<any> => {
     try {
-        return await account.createEmailPasswordSession(
+        const session = await account.createEmailPasswordSession(
             email,
             password
         );
-        // console.log(session);
+
+        if (!session) {
+            throw Error("Cannot Log In")
+        }
+        
         // const nextJsCookies = cookies();
         // nextJsCookies.set("my-custom-session", session.secret, {
         //     path: "/",
@@ -39,6 +43,7 @@ export const login = async (email: string, password: string): Promise<any> => {
         //     sameSite: "strict",
         //     secure: true,
         // }); // Return the session so we can handle the response in the client
+        return session
     } catch (error:any) {
         console.error("Login error:", error);
         throw new Error(`Login failed: ${error.message}`);
